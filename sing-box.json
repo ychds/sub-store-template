@@ -35,10 +35,6 @@
         "action": "reject"
       },
       {
-        "rule_set": "ads",
-        "action": "reject"
-      },
-      {
         "query_type": [
           "A",
           "AAAA"
@@ -289,14 +285,8 @@
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/youtube.srs",
         "download_detour": "direct"
-      },
-      {
-        "tag": "ads",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/Yuu518/sing-box-rules/rule_set/rule_set_site/category-ads-all.srs",
-        "download_detour": "direct"
       }
+      
     ],
     "final": "final",
     "auto_detect_interface": true
