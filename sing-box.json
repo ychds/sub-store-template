@@ -35,6 +35,10 @@
         "action": "reject"
       },
       {
+        "rule_set": "ads",
+        "action": "reject"
+      },
+      {
         "query_type": [
           "A",
           "AAAA"
@@ -42,10 +46,6 @@
         "action": "route",
         "server": "fakeip",
         "rewrite_ttl": 1
-      },
-      {
-        "rule_set": "ads",
-        "action": "reject"
       },
       {
         "rule_set": "cn_domain",
