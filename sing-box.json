@@ -4,7 +4,7 @@
       {
         "tag": "google",
         "type": "https",
-        "server": "8.8.4.4",
+        "server": "8.8.4.4"
       },
       {
         "tag": "ali",
@@ -670,7 +670,7 @@
   "log": {
     "disabled": false,
     "level": "error",
-    "timestamp": true
+    "timestamp": true,
     "output": "/data/adb/box/run/sing-box.log"
   }
 }
