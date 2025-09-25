@@ -14,6 +14,11 @@
         "detour": "proxy"
       },
       {
+        "tag": "Cloudflare", 
+        "type": "loadbalance",
+        "servers": ["Cloudflare-v4", "Cloudflare-v6"]
+      },
+      {
         "tag": "DNSPod-v4",
         "type": "https",
         "server": "119.29.29.29"
@@ -22,6 +27,11 @@
         "tag": "DNSPod-v6",
         "type": "https",
         "server": "2402:4e00::"
+      },
+      {
+        "tag": "DNSPod", 
+        "type": "loadbalance",
+        "servers": ["DNSPod-v4", "DNSPod-v6"]
       },
       {
         "tag": "fakeip",
@@ -34,7 +44,7 @@
       {
         "clash_mode": "Direct",
         "action": "route",
-        "server": ["DNSPod-v4", "DNSPod-v6"]
+        "server": "DNSPod"
       },
       {
         "clash_mode": "Global",
@@ -54,7 +64,7 @@
       {
         "rule_set": "cn_domain",
         "action": "route",
-        "server": ["DNSPod-v4", "DNSPod-v6"]
+        "server": "DNSPod"
       },
       {
         "protocol": "dns",
@@ -62,13 +72,13 @@
         "server": "direct"
       }
     ],
-    "final": "Cloudflare-v4",
+    "final": "Cloudflare",
     "independent_cache": true,
     "strategy": "prefer_ipv4"
   },
   "route": {
     "default_domain_resolver": {
-      "server": ["DNSPod-v4", "DNSPod-v6"]
+      "server": "DNSPod"
     },
     "rules": [
       {
