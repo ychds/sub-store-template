@@ -2,15 +2,26 @@
   "dns": {
     "servers": [
       {
-        "tag": "google",
+        "tag": "Cloudflare-v4",
         "type": "https",
-        "server": "8.8.8.8",
+        "server": "1.1.1.1",
         "detour": "proxy"
       },
       {
-        "tag": "ali",
+        "tag": "Cloudflare-v6",
         "type": "https",
-        "server": "223.5.5.5"
+        "server": "2606:4700:4700::1111",
+        "detour": "proxy"
+      },
+      {
+        "tag": "DNSPod-v4",
+        "type": "https",
+        "server": "119.29.29.29"
+      },
+      {
+        "tag": "DNSPod-v6",
+        "type": "https",
+        "server": "2402:4e00::"
       },
       {
         "tag": "fakeip",
@@ -23,7 +34,7 @@
       {
         "clash_mode": "Direct",
         "action": "route",
-        "server": "ali"
+        "server": ["DNSPod-v4", "DNSPod-v6"]
       },
       {
         "clash_mode": "Global",
@@ -43,7 +54,7 @@
       {
         "rule_set": "cn_domain",
         "action": "route",
-        "server": "ali"
+        "server": ["DNSPod-v4", "DNSPod-v6"]
       },
       {
         "protocol": "dns",
@@ -51,13 +62,13 @@
         "server": "direct"
       }
     ],
-    "final": "ali",
+    "final": "Cloudflare-v4",
     "independent_cache": true,
     "strategy": "prefer_ipv4"
   },
   "route": {
     "default_domain_resolver": {
-      "server": "ali"
+      "server": ["DNSPod-v4", "DNSPod-v6"]
     },
     "rules": [
       {
