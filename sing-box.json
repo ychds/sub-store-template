@@ -295,7 +295,7 @@
       
     ],
     "final": "final",
-    "auto_detect_interface": false
+    "auto_detect_interface": true
   },
   "outbounds": [
     {
