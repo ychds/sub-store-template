@@ -4,8 +4,7 @@
       {
         "tag": "google",
         "type": "https",
-        "server": "8.8.8.8",
-        "detour": "proxy"
+        "server": "8.8.4.4",
       },
       {
         "tag": "ali",
@@ -41,7 +40,7 @@
         ],
         "action": "route",
         "server": "fakeip",
-        "rewrite_ttl": 1
+        "rewrite_ttl": 600
       },
       {
         "rule_set": "cn_domain",
@@ -57,6 +56,13 @@
       "server": "ali"
     },
     "rules": [
+      {
+        "ip_cidr": [
+          "198.18.0.0/15"
+        ],
+        "action": "route",
+        "outbound": "direct"
+      },
       {
         "action": "sniff",
         "sniffer": [
@@ -289,7 +295,7 @@
       
     ],
     "final": "final",
-    "auto_detect_interface": true
+    "auto_detect_interface": false
   },
   "outbounds": [
     {
@@ -663,7 +669,8 @@
   },
   "log": {
     "disabled": false,
-    "level": "info",
+    "level": "error",
     "timestamp": true
+    "output": "/data/adb/box/run/sing-box.log"
   }
 }
