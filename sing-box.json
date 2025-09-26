@@ -2,9 +2,9 @@
   "dns": {
     "servers": [
       {
-        "tag": "Cloudflare",
+        "tag": "cloudflare",
         "type": "https",
-        "server": "1.1.1.1",
+        "server": "dns.cloudflare.com",
         "detour": "proxy"
       },
       {
@@ -31,14 +31,17 @@
         "server": "fakeip"
       },
       {
-        "query_type": ["HTTPS", "SVCB"],
+        "query_type": "HTTPS",
         "action": "reject"
       },
       {
-        "query_type": ["A", "AAAA"],
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
         "action": "route",
         "server": "fakeip",
-        "rewrite_ttl": 600
+        "rewrite_ttl": 1
       },
       {
         "rule_set": "cn_domain",
@@ -46,9 +49,8 @@
         "server": "ali"
       }
     ],
-    "final": "Cloudflare",
-    "independent_cache": true,
-    "strategy": "prefer_ipv4"
+    "final": "cloudflare",
+    "independent_cache": true
   },
   "route": {
     "default_domain_resolver": {
@@ -56,14 +58,14 @@
     },
     "rules": [
       {
-        "ip_cidr": ["198.18.0.0/15"],
-        "action": "route",
-        "outbound": "direct"
-      },
-      {
-        "ip_is_private": true,
-        "action": "route",
-        "outbound": "direct"
+        "action": "sniff",
+        "sniffer": [
+          "http",
+          "tls",
+          "quic",
+          "dns"
+        ],
+        "timeout": "500ms"
       },
       {
         "type": "logical",
@@ -77,6 +79,11 @@
           }
         ],
         "action": "hijack-dns"
+      },
+      {
+        "ip_is_private": true,
+        "action": "route",
+        "outbound": "direct"
       },
       {
         "clash_mode": "Global",
@@ -94,7 +101,10 @@
         "outbound": "bilibili"
       },
       {
-        "rule_set": ["netflix_ip", "netflix_domain"],
+        "rule_set": [
+          "netflix_ip",
+          "netflix_domain"
+        ],
         "action": "route",
         "outbound": "netflix"
       },
@@ -135,30 +145,37 @@
         "outbound": "proxy"
       },
       {
-        "action": "sniff",
-        "sniffer": ["http", "tls", "quic", "dns"],
-        "timeout": "300ms"
-      },
-      {
         "action": "resolve"
       },
       {
-        "rule_set": ["telegram_ip", "telegram_domain"],
+        "rule_set": [
+          "telegram_ip",
+          "telegram_domain"
+        ],
         "action": "route",
         "outbound": "telegram"
       },
       {
-        "rule_set": ["google_ip", "google_domain"],
+        "rule_set": [
+          "google_ip",
+          "google_domain"
+        ],
         "action": "route",
         "outbound": "google"
       },
       {
-        "rule_set": ["apple_ip", "apple_domain"],
+        "rule_set": [
+          "apple_ip",
+          "apple_domain"
+        ],
         "action": "route",
         "outbound": "apple"
       },
       {
-        "rule_set": ["cn_ip", "cn_domain"],
+        "rule_set": [
+          "cn_ip",
+          "cn_domain"
+        ],
         "action": "route",
         "outbound": "cn"
       }
@@ -271,7 +288,7 @@
       }
     ],
     "final": "final",
-    "auto_detect_interface": false
+    "auto_detect_interface": true
   },
   "outbounds": [
     {
@@ -645,7 +662,7 @@
   },
   "log": {
     "disabled": false,
-    "level": "error",
+    "level": "info",
     "timestamp": true
   }
 }
