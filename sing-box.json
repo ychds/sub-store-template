@@ -44,11 +44,6 @@
         "rule_set": "cn_domain",
         "action": "route",
         "server": "ali"
-      },
-      {
-        "protocol": "dns",
-        "action": "route",
-        "server": "direct"
       }
     ],
     "final": "Cloudflare",
